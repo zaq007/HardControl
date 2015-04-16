@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using HardControl.Helpers;
+using HardControl.Info;
 
 namespace HardControl
 {
@@ -19,7 +20,7 @@ namespace HardControl
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            SerialPortsHelper.UpdateSerialList(SerialPortsList);
+            SerialPortsHelper.UpdateSerialList(SerialPortsList);            
         }
 
         protected override void WndProc(ref Message m)
@@ -36,7 +37,14 @@ namespace HardControl
         private void SerialPortsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             SerialPort.PortName = (string)SerialPortsList.SelectedItem;
-            Arduino.Arduino.SetInstance(SerialPort);
+            var arduino = Arduino.Arduino.SetInstance(SerialPort);
+            
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            Lcd.Instance.onPaint(LcdPanel.CreateGraphics());
         }
     }
 }

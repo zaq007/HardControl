@@ -10,7 +10,6 @@ namespace HardControl.Helpers
     {
         public static void UpdateSerialList(ComboBox box)
         {
-            
             box.Items.Clear();
             box.Items.AddRange(System.IO.Ports.SerialPort.GetPortNames());
             if (box.Items.Count == 1)
