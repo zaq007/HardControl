@@ -58,7 +58,10 @@
     <Compile Include="Helpers\WinApiHelper.cs" />
     <Compile Include="Info\IInfoProvider.cs" />
     <Compile Include="Info\InfoController.cs" />
+    <Compile Include="Info\InfoEnumerator.cs" />
     <Compile Include="Info\Lcd.cs" />
+    <Compile Include="Info\TextInfo.cs" />
+    <Compile Include="Info\TimeInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -84,7 +87,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

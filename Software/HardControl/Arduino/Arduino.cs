@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using HardControl.Helpers;
+using HardControl.Info;
 
 namespace HardControl.Arduino
 {
@@ -76,8 +77,9 @@ namespace HardControl.Arduino
                         return;
                     }
                     last = info;
+                    Lcd.Instance.Update();
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(200);
             }
         }
 

@@ -16,11 +16,17 @@ namespace HardControl
         public MainForm()
         {
             InitializeComponent();
+            Lcd.Instance.SetSurface(this);
+            System.Timers.Timer a = new System.Timers.Timer(200);
+            a.Elapsed += Lcd.Instance.Update;
+            a.Start();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            SerialPortsHelper.UpdateSerialList(SerialPortsList);            
+            SerialPortsHelper.UpdateSerialList(SerialPortsList);
+            InfoController.Instance.UpdateInfosList(infosList);
+            InfoEnumerator.MakeMenu(LcdContextMenu);
         }
 
         protected override void WndProc(ref Message m)
@@ -45,6 +51,17 @@ namespace HardControl
         {
             base.OnPaint(e);
             Lcd.Instance.onPaint(LcdPanel.CreateGraphics());
+        }
+
+        private void infosList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            infoProperty.SelectedObject = infosList.SelectedItem;
+        }
+
+
+        private void LcdContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }
