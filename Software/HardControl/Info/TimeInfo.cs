@@ -5,6 +5,7 @@ using System.Text;
 
 namespace HardControl.Info
 {
+    [Serializable]
     class TimeInfo : IInfoProvider
     {
         public override string GetInfo()

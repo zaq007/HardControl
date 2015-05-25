@@ -5,6 +5,7 @@ using System.Text;
 
 namespace HardControl.Info
 {
+    [Serializable]
     class TextInfo : IInfoProvider
     {
         public string Text { get; set; }

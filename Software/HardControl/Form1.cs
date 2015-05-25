@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using HardControl.Helpers;
@@ -62,6 +63,34 @@ namespace HardControl
         private void LcdContextMenu_Opening(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void serializationBtn_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                using(var stream = saveFileDialog1.OpenFile())
+                {
+                    bf.Serialize(stream, InfoController.Instance.Infos);
+                }
+            }
+        }
+
+        private void deserializationBtn_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (var stream = openFileDialog1.OpenFile())
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    List<IInfoProvider> list = (List<IInfoProvider>)bf.Deserialize(stream);
+                    InfoController.Instance.Infos.Clear();
+                    foreach(var item in list)
+                        InfoController.Instance.Infos.Add(item);
+                    InfoController.Instance.UpdateInfosList(infosList);
+                }
+            }
         }
     }
 }

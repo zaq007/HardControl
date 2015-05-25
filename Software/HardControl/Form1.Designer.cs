@@ -36,6 +36,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.infosList = new System.Windows.Forms.ComboBox();
             this.infoProperty = new System.Windows.Forms.PropertyGrid();
+            this.serializationBtn = new System.Windows.Forms.Button();
+            this.deserializationBtn = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // SerialPortsList
@@ -43,7 +47,7 @@
             this.SerialPortsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SerialPortsList.Location = new System.Drawing.Point(12, 288);
             this.SerialPortsList.Name = "SerialPortsList";
-            this.SerialPortsList.Size = new System.Drawing.Size(121, 21);
+            this.SerialPortsList.Size = new System.Drawing.Size(91, 21);
             this.SerialPortsList.TabIndex = 0;
             this.SerialPortsList.SelectedIndexChanged += new System.EventHandler(this.SerialPortsList_SelectedIndexChanged);
             // 
@@ -88,11 +92,37 @@
             this.infoProperty.TabIndex = 4;
             this.infoProperty.ToolbarVisible = false;
             // 
+            // serializationBtn
+            // 
+            this.serializationBtn.Location = new System.Drawing.Point(111, 288);
+            this.serializationBtn.Name = "serializationBtn";
+            this.serializationBtn.Size = new System.Drawing.Size(57, 23);
+            this.serializationBtn.TabIndex = 5;
+            this.serializationBtn.Text = "Save";
+            this.serializationBtn.UseVisualStyleBackColor = true;
+            this.serializationBtn.Click += new System.EventHandler(this.serializationBtn_Click);
+            // 
+            // deserializationBtn
+            // 
+            this.deserializationBtn.Location = new System.Drawing.Point(174, 288);
+            this.deserializationBtn.Name = "deserializationBtn";
+            this.deserializationBtn.Size = new System.Drawing.Size(57, 23);
+            this.deserializationBtn.TabIndex = 6;
+            this.deserializationBtn.Text = "Load";
+            this.deserializationBtn.UseVisualStyleBackColor = true;
+            this.deserializationBtn.Click += new System.EventHandler(this.deserializationBtn_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 321);
+            this.Controls.Add(this.deserializationBtn);
+            this.Controls.Add(this.serializationBtn);
             this.Controls.Add(this.infoProperty);
             this.Controls.Add(this.infosList);
             this.Controls.Add(this.label1);
@@ -115,6 +145,10 @@
         private System.Windows.Forms.ComboBox infosList;
         private System.Windows.Forms.PropertyGrid infoProperty;
         private System.Windows.Forms.ContextMenuStrip LcdContextMenu;
+        private System.Windows.Forms.Button serializationBtn;
+        private System.Windows.Forms.Button deserializationBtn;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

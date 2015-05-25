@@ -5,6 +5,7 @@ using System.Text;
 
 namespace HardControl.Info
 {
+    [Serializable]
     abstract class IInfoProvider
     {
         const int MAX_WIDTH = 20;
