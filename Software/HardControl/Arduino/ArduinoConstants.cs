@@ -11,6 +11,8 @@ namespace HardControl.Arduino
         public const byte MSG_OK = 0x01;
         public const char MSG_INFO = '\x02';
         public const char MSG_END = '\x00';
+
+        public const byte PRESSED_BTN = 0x03;
     }
 
 

@@ -70,9 +70,12 @@ namespace HardControl
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 BinaryFormatter bf = new BinaryFormatter();
+                SerializationHelper s = new SerializationHelper();
+                s.Actions = Action.ActionController.Instance.Actions;
+                s.Infos = InfoController.Instance.Infos;
                 using(var stream = saveFileDialog1.OpenFile())
                 {
-                    bf.Serialize(stream, InfoController.Instance.Infos);
+                    bf.Serialize(stream, s);
                 }
             }
         }
@@ -84,13 +87,32 @@ namespace HardControl
                 using (var stream = openFileDialog1.OpenFile())
                 {
                     BinaryFormatter bf = new BinaryFormatter();
-                    List<IInfoProvider> list = (List<IInfoProvider>)bf.Deserialize(stream);
+                    SerializationHelper helper = (SerializationHelper)bf.Deserialize(stream);
                     InfoController.Instance.Infos.Clear();
-                    foreach(var item in list)
+                    foreach(var item in helper.Infos)
                         InfoController.Instance.Infos.Add(item);
                     InfoController.Instance.UpdateInfosList(infosList);
+
+                    Action.ActionController.Instance.Actions.Clear();
+                    foreach (var item in helper.Actions)
+                        Action.ActionController.Instance.Actions.Add(item.Key, item.Value);
                 }
             }
+        }
+
+        private void actionBtn1_Click(object sender, EventArgs e)
+        {
+            if (Action.ActionController.Instance.Actions[0x01] != null)
+                actionProperty.SelectedObject = Action.ActionController.Instance.Actions[0x01];
+            var actions = Action.ActionEnumerator.GetActions();
+            foreach (var a in actions)
+                actionsList.Items.Add(a);
+        }
+
+        private void actionsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Action.ActionController.Instance.Actions[0x01] = Action.ActionEnumerator.CreateAction(actionsList.SelectedItem as string);
+            actionProperty.SelectedObject = Action.ActionController.Instance.Actions[0x01];
         }
     }
 }

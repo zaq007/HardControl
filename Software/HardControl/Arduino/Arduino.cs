@@ -30,8 +30,26 @@ namespace HardControl.Arduino
         {
             Instance = getInstance(port);
             if (Instance != null)
-                new Thread(Instance.WriteInfo).Start();   
+            {
+                new Thread(Instance.WriteInfo).Start();
+                new Thread(Instance.ServeActions).Start();
+            }
             return Instance;
+        }
+
+        private void ServeActions(object obj)
+        {
+            DateTime last = DateTime.Now;
+            while (true)
+            {
+                byte[] input = Read();
+                if(input.Count() >= 2)
+                    if (input[0] == ArduinoConstants.PRESSED_BTN && DateTime.Now-last >= TimeSpan.FromSeconds(2))
+                    {
+                        Action.ActionController.Instance.Invoke(input[1]);
+                        last = DateTime.Now;
+                    }
+            }
         }
 
 
@@ -56,6 +74,18 @@ namespace HardControl.Arduino
                     throw new Exception();
                 }
             }
+        }
+
+        public byte[] Read()
+        {
+            
+            var len = Port.BytesToRead;
+            byte[] bytes = new byte[len];
+            lock (locker)
+            {
+                    Port.Read(bytes, 0, len);
+            }
+            return bytes;
         }
 
         public void WriteInfo()

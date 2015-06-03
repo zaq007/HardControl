@@ -2,10 +2,10 @@
 #include <LiquidCrystal.h>
 #include <Time.h>  
 #define READY_FOR_CONNECTION 'A'
-#define MSG_OK 0x02
+#define MSG_OK 0x01
 #define MSG_INFO 0x02
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 7, 6, 5, 4);
 #define BTN_DELAY 1000000
 
 unsigned long volatile last = 0;
@@ -15,6 +15,7 @@ byte isSerial = 0;
 void setup()
 {
 	//attachInterrupt(1, int0, RISING);
+        pinMode(3, INPUT); 
         Serial.begin(9600);
         lcd.begin(20, 4);
         lcd.setCursor(0, 0);
@@ -22,15 +23,15 @@ void setup()
         lcd.setCursor(0, 2);
 }
 
-/*void int0()
+void int0()
 {       
         unsigned long time = micros();
         if(time - last > BTN_DELAY)
         {
-          Serial.write("Clicked!\n");
+          Serial.print("\x03\x01");
           last = time;
         }
-}*/
+}
 
 void loop()
 {
@@ -59,6 +60,9 @@ void loop()
             }
           }    
         }
+        int val = digitalRead(3);
+        if(val == HIGH)
+          Serial.print("\x03\x01");
       } else
       {
        isConnected = 0; 

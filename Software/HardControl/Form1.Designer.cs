@@ -40,6 +40,9 @@
             this.deserializationBtn = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.actionBtn1 = new System.Windows.Forms.Button();
+            this.actionsList = new System.Windows.Forms.ComboBox();
+            this.actionProperty = new System.Windows.Forms.PropertyGrid();
             this.SuspendLayout();
             // 
             // SerialPortsList
@@ -116,14 +119,45 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // actionBtn1
+            // 
+            this.actionBtn1.Location = new System.Drawing.Point(323, 42);
+            this.actionBtn1.Name = "actionBtn1";
+            this.actionBtn1.Size = new System.Drawing.Size(92, 23);
+            this.actionBtn1.TabIndex = 7;
+            this.actionBtn1.Text = "ActionButton1";
+            this.actionBtn1.UseVisualStyleBackColor = true;
+            this.actionBtn1.Click += new System.EventHandler(this.actionBtn1_Click);
+            // 
+            // actionsList
+            // 
+            this.actionsList.FormattingEnabled = true;
+            this.actionsList.Location = new System.Drawing.Point(237, 96);
+            this.actionsList.Name = "actionsList";
+            this.actionsList.Size = new System.Drawing.Size(219, 21);
+            this.actionsList.TabIndex = 3;
+            this.actionsList.SelectedIndexChanged += new System.EventHandler(this.actionsList_SelectedIndexChanged);
+            // 
+            // actionProperty
+            // 
+            this.actionProperty.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.actionProperty.Location = new System.Drawing.Point(237, 120);
+            this.actionProperty.Name = "actionProperty";
+            this.actionProperty.Size = new System.Drawing.Size(219, 162);
+            this.actionProperty.TabIndex = 4;
+            this.actionProperty.ToolbarVisible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 321);
+            this.Controls.Add(this.actionBtn1);
             this.Controls.Add(this.deserializationBtn);
             this.Controls.Add(this.serializationBtn);
+            this.Controls.Add(this.actionProperty);
             this.Controls.Add(this.infoProperty);
+            this.Controls.Add(this.actionsList);
             this.Controls.Add(this.infosList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LcdPanel);
@@ -149,6 +183,9 @@
         private System.Windows.Forms.Button deserializationBtn;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button actionBtn1;
+        private System.Windows.Forms.ComboBox actionsList;
+        private System.Windows.Forms.PropertyGrid actionProperty;
     }
 }
 
